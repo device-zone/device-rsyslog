@@ -1,0 +1,14 @@
+# systemd service for managing all rsyslog autoconfiguration.
+
+[Unit]
+Description=RSyslog Configuration Autodiscovery
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/libexec/device-autodiscovery/rsyslog start
+ExecReload=/bin/bash /usr/libexec/device-autodiscovery/rsyslog reload
+RemainAfterExit=on
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,15 @@
+# systemd service for managing all rsyslog postconfiguration.
+
+[Unit]
+Description=RSyslog Configuration Postdiscovery
+After=rsyslog-autodiscovery.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/libexec/device-postdiscovery/rsyslog start
+ExecReload=/bin/bash /usr/libexec/device-postdiscovery/rsyslog reload
+RemainAfterExit=on
+
+[Install]
+WantedBy=multi-user.target
+

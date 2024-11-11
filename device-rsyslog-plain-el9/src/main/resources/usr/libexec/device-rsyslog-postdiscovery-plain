@@ -1,0 +1,48 @@
+#!/bin/bash
+  
+#
+# RSyslog Postdiscovery - Firewall
+# ================================
+#
+# This script opens the firewall for all rsyslog instances..
+
+set -e
+
+exec 2> >(logger -t ${0})
+
+#
+# Silence warnings with runuser.
+cd /tmp
+
+#
+# Add/remove TLS
+
+line=/etc/device/services/syslog/plain/
+
+if test -f "/run/rsyslogd.zone"; then
+
+  zone=$(head -n 1 "/run/rsyslogd.zone")
+
+  if command -v /usr/bin/firewall-cmd 2>/dev/null; then
+    logger -t rsyslog-postdiscovery "Notice: closing firewall for rsyslog zone ${zone}..."
+    /usr/bin/firewall-cmd --quiet --zone=${zone} --remove-service=syslog 2> /dev/null || true
+  fi
+
+  rm "/run/rsyslogd.zone"
+
+fi
+
+if test -L "$line/zone.xml"; then
+
+  zonefile=$(readlink -e "$line/zone.xml")
+  zone=$(basename -s .xml ${zonefile})
+
+  if command -v /usr/bin/firewall-cmd 2>/dev/null; then
+    logger -t rsyslog-postdiscovery "Notice: opening firewall for rsyslog zone ${zone}..."
+    /usr/bin/firewall-cmd --quiet --zone=${zone} --add-service=syslog 2> /dev/null || true
+    echo "${zone}" > /run/rsyslogd.zone
+  fi
+
+fi
+
+

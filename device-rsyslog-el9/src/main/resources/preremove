@@ -1,0 +1,7 @@
+if [ $1 = 0 ]; then
+  /usr/bin/systemctl stop rsyslog-autodiscovery.service
+  /usr/bin/systemctl stop rsyslog-postdiscovery.service
+  /usr/bin/systemctl disable rsyslog-autodiscovery.service
+  /usr/bin/systemctl disable rsyslog-postdiscovery.service
+fi
+

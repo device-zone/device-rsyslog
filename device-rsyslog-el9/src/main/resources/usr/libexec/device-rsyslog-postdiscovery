@@ -1,0 +1,46 @@
+#!/bin/bash
+  
+#
+# Rsyslogd Server Postdiscovery
+# =============================
+#
+# This script autogenerates any required rsyslogd configuration after startup.
+
+set -e
+
+
+#
+# Handle the cleanup
+# ------------------
+cleanup_before_exit () {
+  if [ -d "${tmpdir}" ]; then
+    rm -rf "${tmpdir}"
+  fi
+}
+# be in a temporary workspace (this works on linux and macosx)
+tmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir'`
+# trap catches the exit signal and runs the specified function
+trap cleanup_before_exit EXIT
+# be in our directory
+cd "${tmpdir}"
+
+
+
+#
+# Per instance? Run all scripts
+
+logger -t "${0}" "running postdiscovery for rsyslogd..."
+
+find "$0.d" -type f -executable | sort | \
+while read x; do
+  "$x" "${1}" < /dev/null || touch error;
+done
+
+if test ! -f "error"; then
+  logger -t "${0}" "completed postdiscovery for rsyslogd."
+  exit 0
+else
+  logger -t "${0}" "failed postdiscovery for rsyslogd."
+  exit 1
+fi
+

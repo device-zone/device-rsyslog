@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+umask 0002
+
+OPTIONS="--default all --select-base /usr/libexec/device/system/syslog/protocol.txt --select protocol"
+
+if [ "$1" == "--" ]; then
+
+  /usr/libexec/device-set ${OPTIONS} "$@"
+
+  /usr/bin/sudo /usr/bin/systemctl try-reload-or-restart rsyslog-autodiscovery.service
+  /usr/bin/sudo /usr/bin/systemctl try-reload-or-restart rsyslog.service
+
+elif [ "$1" == "-c" ]; then
+
+  /usr/libexec/device-set ${OPTIONS} "$@"
+
+fi
+
