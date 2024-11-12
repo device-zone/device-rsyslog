@@ -8,7 +8,7 @@
 
   <artifactId>device-rsyslog</artifactId>
   <groupId>zone.device.platform</groupId>
-  <version>0.9.2-SNAPSHOT</version>
+  <version>0.9.2</version>
   <packaging>pom</packaging>
   <name>device rsyslog package</name>
   <description>Packaging for the rsyslog appliance</description>
@@ -23,7 +23,7 @@
     <connection>scm:git:https://github.com/device-zone/device-rsyslog.git</connection>
     <developerConnection>scm:git:https://github.com/device-zone/device-rsyslog.git</developerConnection>
     <url>https://github.com/device-zone/device-rsyslog/</url>
-    <tag>HEAD</tag>
+    <tag>device-rsyslog-0.9.2</tag>
   </scm>
 
   <modules>
