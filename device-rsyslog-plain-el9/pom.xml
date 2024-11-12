@@ -4,7 +4,7 @@
   <parent>
     <artifactId>device-rsyslog</artifactId>
     <groupId>zone.device.platform</groupId>
-    <version>0.9.3</version>
+    <version>0.9.4-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -18,7 +18,7 @@
 
   <artifactId>device-rsyslog-plain</artifactId>
   <groupId>zone.device.platform.el9</groupId>
-  <version>0.9.3</version>
+  <version>0.9.4-SNAPSHOT</version>
   <packaging>rpm</packaging>
   <name>device rsyslog applicance plain extension for el9</name>
   <description>Packaging for the rsyslog appliance plain extension for ${release.distribution}</description>
