@@ -3,6 +3,7 @@
 [Unit]
 Description=RSyslog Configuration Postdiscovery
 After=rsyslog.service
+After=firewalld.service
 
 [Service]
 Type=oneshot
