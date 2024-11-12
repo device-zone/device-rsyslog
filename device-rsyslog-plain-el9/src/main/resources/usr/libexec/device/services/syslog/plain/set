@@ -11,6 +11,7 @@ if [ "$1" == "--" ]; then
 
   /usr/bin/sudo /usr/bin/systemctl try-restart rsyslog-autodiscovery.service
   /usr/bin/sudo /usr/bin/systemctl try-restart rsyslog.service
+  /usr/bin/sudo /usr/bin/systemctl try-restart rsyslog-postdiscovery.service
 
 elif [ "$1" == "-c" ]; then
 
