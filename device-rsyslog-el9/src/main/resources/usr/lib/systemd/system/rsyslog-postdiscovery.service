@@ -2,7 +2,7 @@
 
 [Unit]
 Description=RSyslog Configuration Postdiscovery
-After=rsyslog-autodiscovery.service
+After=rsyslog.service
 
 [Service]
 Type=oneshot

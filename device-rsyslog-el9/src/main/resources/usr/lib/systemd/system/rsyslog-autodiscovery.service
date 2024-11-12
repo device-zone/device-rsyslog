@@ -2,6 +2,7 @@
 
 [Unit]
 Description=RSyslog Configuration Autodiscovery
+Before=rsyslog.service
 
 [Service]
 Type=oneshot
